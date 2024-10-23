@@ -1,10 +1,13 @@
+// тип для системы счисления
 type NumberBase = 'decimal' | 'binary' | 'hexadecimal';
 
+// Интерфейс для представления числа со значением и системой счисления
 interface NumberValue {
     value: string;
     base: NumberBase;
 }
 
+// Функция для преобразования NumberValue в число типа number
 function parseNumber(numberValue: NumberValue): number {
     let base: number;
     switch (numberValue.base) {
@@ -23,6 +26,7 @@ function parseNumber(numberValue: NumberValue): number {
     return parseInt(numberValue.value, base);
 }
 
+// Функция для форматирования числа в строку в заданной системе счисления
 function formatNumber(value: number, base: NumberBase): string {
     switch (base) {
         case 'decimal':
@@ -36,6 +40,7 @@ function formatNumber(value: number, base: NumberBase): string {
     }
 }
 
+// Функция сложения двух чисел
 function add(a: NumberValue, b: NumberValue, resultBase?: NumberBase): NumberValue {
     const numA = parseNumber(a);
     const numB = parseNumber(b);
@@ -47,6 +52,7 @@ function add(a: NumberValue, b: NumberValue, resultBase?: NumberBase): NumberVal
     };
 }
 
+// Функция вычитания двух чисел
 function subtract(a: NumberValue, b: NumberValue, resultBase?: NumberBase): NumberValue {
     const numA = parseNumber(a);
     const numB = parseNumber(b);
@@ -58,6 +64,7 @@ function subtract(a: NumberValue, b: NumberValue, resultBase?: NumberBase): Numb
     };
 }
 
+// Функция умножения двух чисел
 function multiply(a: NumberValue, b: NumberValue, resultBase?: NumberBase): NumberValue {
     const numA = parseNumber(a);
     const numB = parseNumber(b);
@@ -69,6 +76,7 @@ function multiply(a: NumberValue, b: NumberValue, resultBase?: NumberBase): Numb
     };
 }
 
+// Функция деления двух чисел
 function divide(a: NumberValue, b: NumberValue, resultBase?: NumberBase): NumberValue {
     const numA = parseNumber(a);
     const numB = parseNumber(b);
@@ -83,17 +91,19 @@ function divide(a: NumberValue, b: NumberValue, resultBase?: NumberBase): Number
     };
 }
 
+// Десятичные числа
 const decimalNum1: NumberValue = { value: '42', base: 'decimal' };
 const decimalNum2: NumberValue = { value: '10', base: 'decimal' };
 
-// Binary numbers
+// Двоичные числа
 const binaryNum1: NumberValue = { value: '101010', base: 'binary' };
 const binaryNum2: NumberValue = { value: '1010', base: 'binary' };
 
+// Шестнадцатеричные числа
 const hexNum1: NumberValue = { value: '2A', base: 'hexadecimal' };
 const hexNum2: NumberValue = { value: 'A', base: 'hexadecimal' };
 
-console.log('Addition:');
+console.log('Сложение:');
 
 let result = add(decimalNum1, decimalNum2);
 console.log(`${decimalNum1.value} + ${decimalNum2.value} = ${result.value} (${result.base})`);
@@ -104,7 +114,7 @@ console.log(`${binaryNum1.value} + ${binaryNum2.value} = ${result.value} (${resu
 result = add(hexNum1, hexNum2);
 console.log(`${hexNum1.value} + ${hexNum2.value} = ${result.value} (${result.base})`);
 
-console.log('\nSubtraction:');
+console.log('\nВычитание:');
 
 result = subtract(decimalNum1, decimalNum2);
 console.log(`${decimalNum1.value} - ${decimalNum2.value} = ${result.value} (${result.base})`);
@@ -115,7 +125,7 @@ console.log(`${binaryNum1.value} - ${binaryNum2.value} = ${result.value} (${resu
 result = subtract(hexNum1, hexNum2);
 console.log(`${hexNum1.value} - ${hexNum2.value} = ${result.value} (${result.base})`);
 
-console.log('\nMultiplication:');
+console.log('\nУмножение:');
 
 result = multiply(decimalNum1, decimalNum2);
 console.log(`${decimalNum1.value} * ${decimalNum2.value} = ${result.value} (${result.base})`);
@@ -126,7 +136,7 @@ console.log(`${binaryNum1.value} * ${binaryNum2.value} = ${result.value} (${resu
 result = multiply(hexNum1, hexNum2);
 console.log(`${hexNum1.value} * ${hexNum2.value} = ${result.value} (${result.base})`);
 
-console.log('\nDivision:');
+console.log('\nДеление:');
 
 result = divide(decimalNum1, decimalNum2);
 console.log(`${decimalNum1.value} / ${decimalNum2.value} = ${result.value} (${result.base})`);
@@ -139,7 +149,7 @@ console.log(`${hexNum1.value} / ${hexNum2.value} = ${result.value} (${result.bas
 
 
 
-console.log('\nCross-base Addition:');
+console.log('\nОперации с разной системой счисления:');
 
 result = add(decimalNum1, binaryNum2, 'decimal');
 console.log(`${decimalNum1.value} (decimal) + ${binaryNum2.value} (binary) = ${result.value} (${result.base})`);
